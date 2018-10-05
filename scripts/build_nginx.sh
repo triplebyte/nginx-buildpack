@@ -17,7 +17,7 @@ HEADERS_MORE_VERSION=${HEADERS_MORE_VERSION-0.33}
 nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 pcre_tarball_url=http://garr.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2
 headers_more_nginx_module_url=https://github.com/agentzh/headers-more-nginx-module/archive/v${HEADERS_MORE_VERSION}.tar.gz
-brotli_nginx_module_url=https://github.com/google/ngx_brotli/archive/master.tar.gz
+brotli_nginx_module_git_url=https://github.com/google/ngx_brotli.git
 
 temp_dir=$(mktemp -d /tmp/nginx.XXXXXXXXXX)
 
@@ -37,8 +37,8 @@ echo "Downloading $pcre_tarball_url"
 echo "Downloading $headers_more_nginx_module_url"
 (cd nginx-${NGINX_VERSION} && curl -L $headers_more_nginx_module_url | tar xvz )
 
-echo "Downloading $brotli_nginx_module_url"
-(cd nginx-${NGINX_VERSION} && curl -L $brotli_nginx_module_url | tar xvz )
+echo "Cloding $brotli_nginx_module_git_url"
+(cd nginx-${NGINX_VERSION} && git clone --recursive $brotli_nginx_module_git_url )
 
 (
 	cd nginx-${NGINX_VERSION}
