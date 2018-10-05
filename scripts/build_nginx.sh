@@ -46,7 +46,7 @@ echo "Cloding $brotli_nginx_module_git_url"
 		--with-pcre=pcre-${PCRE_VERSION} \
 		--prefix=/tmp/nginx \
 		--add-module=/${temp_dir}/nginx-${NGINX_VERSION}/headers-more-nginx-module-${HEADERS_MORE_VERSION} \
-		--add-module=/${temp_dir}/nginx-${NGINX_VERSION}/ngx_brotli-master \
+		--add-module=/${temp_dir}/nginx-${NGINX_VERSION}/ngx_brotli \
     --with-http_gzip_static_module \
     --with-http_realip_module
 	make install
