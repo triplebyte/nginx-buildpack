@@ -20,9 +20,9 @@ brotli_nginx_module_git_url=https://github.com/google/ngx_brotli.git
 
 temp_dir=$(mktemp -d /tmp/nginx.XXXXXXXXXX)
 
-echo "Serving files from /tmp on $PORT"
-cd /tmp
-python -m SimpleHTTPServer $PORT &
+# echo "Serving files from /tmp on $PORT"
+# cd /tmp
+# python -m SimpleHTTPServer $PORT &
 
 cd $temp_dir
 echo "Temp dir: $temp_dir"
@@ -51,8 +51,10 @@ echo "Cloding $brotli_nginx_module_git_url"
 	make install
 )
 
-while true
-do
-	sleep 1
-	echo "."
-done
+echo "Done :)"
+
+# while true
+# do
+# 	sleep 1
+# 	echo "."
+# done
