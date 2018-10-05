@@ -51,7 +51,7 @@ echo "Cloding $brotli_nginx_module_git_url"
 	make install
 )
 
-cp -r /tmp/nginx/ ./nginx-build
+cp -r /tmp/nginx/ ~/nginx-build
 
 echo "Done :)"
 
