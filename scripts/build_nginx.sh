@@ -51,9 +51,10 @@ echo "Cloding $brotli_nginx_module_git_url"
 	make install
 )
 
-cp -r $temp_dir ~/nginx-build
+tar -czvf nginx-build.tar.gz $temp_dir
+curl --upload-file nginx-build.tar.gz https://transfer.sh/nginx-build.tar.gz
 
-echo "Done :)"
+echo "Done and uploaded to https://transfer.sh :)"
 
 # while true
 # do
