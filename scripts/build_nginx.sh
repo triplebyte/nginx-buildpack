@@ -9,14 +9,15 @@
 # Once the dyno has is 'up' you can open your browser and navigate
 # this dyno's directory structure to download the nginx binary.
 
-NGINX_VERSION=${NGINX_VERSION-1.7.12}
-PCRE_VERSION=${PCRE_VERSION-8.36}
-HEADERS_MORE_VERSION=${HEADERS_MORE_VERSION-0.25}
+NGINX_VERSION=${NGINX_VERSION-1.15.5}
+PCRE_VERSION=${PCRE_VERSION-8.42}
+HEADERS_MORE_VERSION=${HEADERS_MORE_VERSION-0.33}
 
 
 nginx_tarball_url=http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 pcre_tarball_url=http://garr.dl.sourceforge.net/project/pcre/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.bz2
 headers_more_nginx_module_url=https://github.com/agentzh/headers-more-nginx-module/archive/v${HEADERS_MORE_VERSION}.tar.gz
+brotli_nginx_module_url=https://github.com/google/ngx_brotli/archive/master.tar.gz
 
 temp_dir=$(mktemp -d /tmp/nginx.XXXXXXXXXX)
 
@@ -36,12 +37,16 @@ echo "Downloading $pcre_tarball_url"
 echo "Downloading $headers_more_nginx_module_url"
 (cd nginx-${NGINX_VERSION} && curl -L $headers_more_nginx_module_url | tar xvz )
 
+echo "Downloading $brotli_nginx_module_url"
+(cd nginx-${NGINX_VERSION} && curl -L $brotli_nginx_module_url | tar xvz )
+
 (
 	cd nginx-${NGINX_VERSION}
 	./configure \
 		--with-pcre=pcre-${PCRE_VERSION} \
 		--prefix=/tmp/nginx \
 		--add-module=/${temp_dir}/nginx-${NGINX_VERSION}/headers-more-nginx-module-${HEADERS_MORE_VERSION} \
+		--add-module=/${temp_dir}/nginx-${NGINX_VERSION}/ngx_brotli-master \
     --with-http_gzip_static_module \
     --with-http_realip_module
 	make install
